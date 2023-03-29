@@ -6,7 +6,7 @@
 /*   By: malbrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 13:10:56 by malbrand          #+#    #+#             */
-/*   Updated: 2023/03/28 12:35:32 by malbrand         ###   ########.fr       */
+/*   Updated: 2023/03/29 16:02:36 by malbrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 int	main(int ac, char **av)
 {
-	if (ac != 2)
+	try
 	{
-		std::cout << "Error: could not open file." << std::endl;
-		return (0);
+		if (ac != 2)
+			throw "Error: need one file.";
+
+		BitcoinExchange btc;
+		btc.getMap();
+		btc.convert(av[1], btc);
 	}
-	std::string db = "./data.csv";
- 	BitcoinExchange btc;
- 	BitcoinExchange blop(btc);
-	//btc.display(db, av[1]);
-	(void)av;
+	catch(const char *s)
+	{
+		std::cerr << s << std::endl;
+	}
 	return (0);
 }
